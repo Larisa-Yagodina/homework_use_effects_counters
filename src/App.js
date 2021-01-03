@@ -1,24 +1,49 @@
-import logo from './logo.svg';
+import React, {useEffect, useState} from 'react';
 import './App.css';
+import Counters from "./Counter";
+import Visible from "./Additional";
+
 
 function App() {
+
+  useEffect(() => {
+    console.log('component App did mount')
+  }, [])
+
+  const [count, setCount] = useState(1)
+
+  const sum = (count, digit) => {
+    const result = count + digit;
+    setCount(result)
+  }
+
+  useEffect(() => {
+    console.log('count')
+  }, [count])
+
+  const [additionalCounter, setAdditionalCounter] = useState(10)
+
+  const additionalSum = (additionalCounter, digit) => {
+    const result = additionalCounter + digit;
+    setAdditionalCounter(result)
+  }
+
+  const [open, setOpen] = useState(false)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className={'main'}>
+        <h1>UseEffects</h1>
+        <Counters
+            count={count}
+            sum={sum}
+        />
+        <hr/>
+        <button onClick={() => setOpen(!open)}> {open ? 'close' : 'open'} </button>
+        {open && <Visible
+            additionalCounter={additionalCounter}
+            additionalSum={additionalSum}
+        />}
+      </div>
   );
 }
 
