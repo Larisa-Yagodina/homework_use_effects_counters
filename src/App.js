@@ -32,7 +32,7 @@ function App() {
 
   return (
       <div className={'main'}>
-        <h1>UseEffects</h1>
+        <h1>Counter and UseEffects</h1>
         <Counters
             count={count}
             sum={sum}
